@@ -9,7 +9,7 @@ import ProductDetail from './pages/ProductDetail.jsx';
 import Login from './pages/Login.jsx';
 import Register from './pages/Register.jsx';
 import Dashboard from './pages/Dashboard.jsx';
-import { Navbar } from './components/Navbar.jsx';
+import Navbar from './components/Navbar.jsx';
 import { Footer } from './components/Footer.jsx';
 
 export default function App() {

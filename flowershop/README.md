@@ -163,11 +163,11 @@ Visit the public preview URL:
 
 **https://[random-tunnel-id].trycloudflare.com/**
 
-> **Note**: Cloudflare tunnel URLs are generated dynamically and may change. Use the local development URL (`http://localhost:5173/`) for consistent access during development.
+> **Note**: Cloudflare tunnel URLs are generated dynamically and may change. Use the local development URL (`http://localhost:5174/`) for consistent access during development.
 
 ### Development Access
 For local development, use:
-- **Frontend**: `http://localhost:5173/`
+- **Frontend**: `http://localhost:5174/`
 - **Backend API**: `http://localhost:3001/api/`
 
 ## 🚀 Deployment

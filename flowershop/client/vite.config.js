@@ -7,11 +7,11 @@ export default defineConfig({
   server: {
     host: '0.0.0.0',
     allowedHosts: ['.monkeycode-ai.online', 'velvet-vocational-processes-afternoon.trycloudflare.com'],
-    port: 5173,
+    port: 5174,
     strictPort: true,
   },
   preview: {
-    port: 5173,
+    port: 5174,
     strictPort: true,
   },
 });

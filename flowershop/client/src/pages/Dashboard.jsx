@@ -57,26 +57,22 @@ export default function Dashboard() {
       ) : (
         <div className="product-list">
           {products.map((product) => (
-            <div key={product.id} className="product-card">
-              <img src={product.image} alt={product.name} className="product-image" />
-              <div className="product-info">
-                <h3 className="product-name">{product.name}</h3>
-                <p className="product-price">$${product.price}</p>
-                <p className="product-stock">Stock: {product.stock}</p>
-                <span className="badge {product.isApproved ? 'approved' : 'pending'}>
-                  {product.isApproved ? 'Approved' : 'Pending Approval'}
-                </span>
-              </div>
-              <div className="product-actions">
-                <Link to={`/products/${product.id}/edit`} className="btn-link">
-                  Edit
-                </Link>
-                <button onClick={() => handleDelete(product.id)} className="btn-link delete">
-                  Delete
-                </button>
-              </div>
-            </div>
-          ))}
+                <div key={product.id} className="product-card">
+                  <img src={product.image} alt={product.name} className="product-image" />
+                  <div className="product-info">
+                    <h3 className="product-name">{product.name}</h3>
+                    <p className="product-price">$${product.price}</p>
+                    <p className="product-stock">Stock: {product.stock}</p>
+                    <span className={`badge ${product.isApproved ? 'approved' : 'pending'}`}>
+                      {product.isApproved ? 'Approved' : 'Pending Approval'}
+                    </span>
+                  </div>
+                  <div className="product-actions">
+                    <Link to={`/products/${product.id}/edit`} className="btn-link">Edit</Link>
+                    <button onClick={() => handleDelete(product.id)} className="btn-link delete">Delete</button>
+                  </div>
+                </div>
+            ))}
         </div>
       )}
     </div>

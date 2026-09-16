@@ -65,7 +65,7 @@ export default function ProductDetail() {
         <div className="product-detail-info">
           <h1 className="product-title">{product.name}</h1>
           <p className="product-description">{product.description}</p>
-          <div className="product-price">$${product.price}</p>
+          <div className="product-price">$${product.price}</div>
           <div className="product-stock">
             <span className="stock-label">In stock:</span>
             <span className="stock-quantity">{product.stock}</span>

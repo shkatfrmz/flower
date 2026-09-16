@@ -78,7 +78,7 @@ export default function Navbar({ onToast }) {
                   <Link to={user.role === 'admin' ? '/admin' : '/dashboard'} onClick={() => setMenuOpen(false)}>
                     {user.role === 'admin' ? 'Admin Panel' : 'My Shop'}
                   </Link>
-                  <button onClick={handleLogout} onClick={() => setMenuOpen(false)}>
+                    <button onClick={() => {handleLogout(); setMenuOpen(false);}}>
                     Sign out
                   </button>
                 </div>

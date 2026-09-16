@@ -4,7 +4,7 @@ import { useAuth } from '../context/AuthContext.jsx';
 import { useApi } from '../hooks/useApi.jsx';
 import { toast } from 'react-hot-toast';
 
-export default function Register({ onToast }) {
+export function Register({ onToast }) {
   const { register } = useAuth();
   const navigate = useNavigate();
   const [username, setUsername] = useState('');

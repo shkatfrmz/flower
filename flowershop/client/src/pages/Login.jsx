@@ -4,7 +4,7 @@ import { useAuth } from '../context/AuthContext.jsx';
 import { useApi } from '../hooks/useApi.jsx';
 import { toast } from 'react-hot-toast';
 
-export default function Login({ onToast }) {
+export function Login({ onToast }) {
   const { login } = useAuth();
   const navigate = useNavigate();
   const [email, setEmail] = useState('');

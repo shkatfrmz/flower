@@ -3,12 +3,12 @@ import { toast } from 'react-hot-toast';
 import { AuthProvider } from './context/AuthContext.jsx';
 import { CartProvider } from './context/CartContext.jsx';
 import { ToastContainer } from 'react-hot-toast';
-import { Home } from './pages/Home.jsx';
-import { Shop } from './pages/Shop.jsx';
-import { ProductDetail } from './pages/ProductDetail.jsx';
-import { Login } from './pages/Login.jsx';
-import { Register } from './pages/Register.jsx';
-import { Dashboard } from './pages/Dashboard.jsx';
+import Home from './pages/Home.jsx';
+import Shop from './pages/Shop.jsx';
+import ProductDetail from './pages/ProductDetail.jsx';
+import Login from './pages/Login.jsx';
+import Register from './pages/Register.jsx';
+import Dashboard from './pages/Dashboard.jsx';
 import { Navbar } from './components/Navbar.jsx';
 import { Footer } from './components/Footer.jsx';
 

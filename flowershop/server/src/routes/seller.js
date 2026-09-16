@@ -20,7 +20,7 @@ router.get('/products', (req, res) => {
   res.json({ products: parseProducts(rows) });
 });
 
-router.post('/products', (req, res) => {
+router.post('/products', async (req, res) => {
   const { name, description, price, stock, category_id, images } = req.body || {};
   if (!name || !String(name).trim()) return res.status(400).json({ error: 'Product name is required' });
   if (price === undefined || isNaN(Number(price)) || Number(price) <= 0) return res.status(400).json({ error: 'Valid price is required' });
@@ -36,11 +36,13 @@ router.post('/products', (req, res) => {
     Math.max(0, Number(stock) || 0),
     JSON.stringify(Array.isArray(images) && images.length ? images : [])
   );
+  // add memory entry for product description
+  await addMemory(`${String(name).trim()} - ${String(description || '').trim()}`, { productId: info.lastInsertRowid });
   const row = db.prepare('SELECT * FROM products WHERE id = ?').get(info.lastInsertRowid);
   res.status(201).json({ product: parseProduct(row), message: 'Product submitted for admin approval' });
 });
 
-router.put('/products/:id', (req, res) => {
+router.put('/products/:id', async (req, res) => {
   const product = db.prepare('SELECT * FROM products WHERE id = ?').get(req.params.id);
   if (!product) return res.status(404).json({ error: 'Product not found' });
   if (product.seller_id !== req.user.id && req.user.role !== 'admin') return res.status(403).json({ error: 'Not your product' });

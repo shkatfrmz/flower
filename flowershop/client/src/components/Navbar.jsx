@@ -2,18 +2,19 @@ import { useEffect, useRef, useState } from 'react';
 import { Link, NavLink, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext.jsx';
 import { useCart } from '../context/CartContext.jsx';
-import { IconCart, IconFlower, IconLogout, IconUser } from './Icons.jsx';
+import { IconCart, IconFlower } from './Icons.jsx';
 
 export default function Navbar({ onToast }) {
   const { user, logout } = useAuth();
   const { count } = useCart();
   const navigate = useNavigate();
-  const [menuOpen, setMenuOpen] = useState(false);
-  const menuRef = useRef(null);
+  const [mobileOpen, setMobileOpen] = useState(false);
+  const [userOpen, setUserOpen] = useState(false);
+  const userRef = useRef(null);
 
   useEffect(() => {
     function onClick(e) {
-      if (menuRef.current && !menuRef.current.contains(e.target)) setMenuOpen(false);
+      if (userRef.current && !userRef.current.contains(e.target)) setUserOpen(false);
     }
     document.addEventListener('mousedown', onClick);
     return () => document.removeEventListener('mousedown', onClick);
@@ -21,7 +22,8 @@ export default function Navbar({ onToast }) {
 
   function handleLogout() {
     logout();
-    onToast('Signed out', 'success');
+    if (onToast) onToast('Signed out', 'success');
+    setUserOpen(false);
     navigate('/');
   }
 
@@ -30,95 +32,58 @@ export default function Navbar({ onToast }) {
     { to: '/shop', label: 'Shop' },
     { to: '/graph', label: 'Graph' },
   ];
-  if (user) {
-    navItems.push({ to: user.role === 'admin' ? '/admin' : '/dashboard', label: user.role === 'admin' ? 'Admin' : 'My Shop' });
-  }
 
   return (
     <header className="header">
-      {/* Left spacer */}
-      <div className="header-left" />
-      {/* Logo */}
-      <div className="logo">
-        <Link to="/" className="logo-link">
-          <span className="logo-flower"><IconFlower size={32} /></span>
-          PetalBloom
+      <nav className={`nav${mobileOpen ? ' open' : ''}`}>
+        {navItems.map((item) => (
+          <NavLink
+            key={item.to}
+            to={item.to}
+            end={item.to === '/'}
+            className={({ isActive }) => (isActive ? 'active' : '')}
+            onClick={() => setMobileOpen(false)}
+          >
+            {item.label}
+          </NavLink>
+        ))}
+      </nav>
+
+      <Link to="/" className="logo">
+        <span className="logo-flower"><IconFlower size={28} /></span>
+        PETALBLOOM
+      </Link>
+
+      <div className="header-icons">
+        <Link to="/cart" className="cart-link" aria-label="Cart">
+          <IconCart size={20} />
+          {count > 0 && <span className="cart-count">{count}</span>}
         </Link>
-      </div>
-      {/* Right side: nav, icons, menu button */}
-      <div className="header-right">
-        {/* Desktop nav */}
-        <nav className="nav">
-          {navItems.map((item) => (
-            <NavLink key={item.to} to={item.to} className={({ isActive }) => (isActive ? 'active' : '')} end={item.to === '/'}>
-              {item.label}
-            </NavLink>
-          ))}
-          {user && (
-            <>
-              <NavLink to={user.role === 'admin' ? '/admin' : '/dashboard'} className="nav-link">
-                {user.role === 'admin' ? 'Admin' : 'My Shop'}
-              </NavLink>
-            </>
-          )}
-        </nav>
-        {/* Icons: cart and user */}
-        <div className="header-icons">
-          <Link to="/cart" className="icon-link cart-link" aria-label="Cart">
-            <IconCart size={18} />
-            {count > 0 && <span className="cart-count">{count}</span>}
-          </Link>
-          {user ? (
-            <div className="user-menu" ref={menuRef}>
-              <span className="avatar">{user.username.slice(0, 1).toUpperCase()}</span>
-              <button className="btn-user" onClick={() => setMenuOpen((o) => !o)}>
-                {user.username}
-              </button>
-              {menuOpen && (
-                <div className="user-dropdown">
-                  <Link to={user.role === 'admin' ? '/admin' : '/dashboard'} onClick={() => setMenuOpen(false)}>
-                    {user.role === 'admin' ? 'Admin Panel' : 'My Shop'}
-                  </Link>
-                    <button onClick={() => {handleLogout(); setMenuOpen(false);}}>
-                    Sign out
-                  </button>
-                </div>
-              )}
-            </div>
-          ) : (
-            <>
-              <Link to="/login" className="btn-login">Sign in</Link>
-              <Link to="/register" className="btn-register">Sell flowers</Link>
-            </>
-          )}
-        </div>
-        {/* Mobile menu button */}
-        <button className="menu-btn" onClick={() => setMenuOpen(!menuOpen)}>
-          <IconFlower size={25} />
-        </button>
-      </div>
-      {/* Mobile nav overlay */}
-      {menuOpen && (
-        <div className="mobile-nav-overlay" onClick={() => setMenuOpen(false)}>
-          <nav className="mobile-nav">
-            {navItems.map((item) => (
-              <Link key={item.to} to={item.to} className="mobile-nav-link" end={item.to === '/'}>
-                {item.label}
-              </Link>
-            ))}
-            {user && (
-              <>
-                <Link to={user.role === 'admin' ? '/admin' : '/dashboard'} className="mobile-nav-link">
+        {user ? (
+          <div className="user-menu" ref={userRef}>
+            <button className="btn-user" onClick={() => setUserOpen((o) => !o)}>
+              {user.username}
+            </button>
+            {userOpen && (
+              <div className="user-dropdown">
+                <Link to={user.role === 'admin' ? '/admin' : '/dashboard'} onClick={() => setUserOpen(false)}>
                   {user.role === 'admin' ? 'Admin Panel' : 'My Shop'}
                 </Link>
-                <button onClick={handleLogout} className="mobile-nav-link">
-                  Sign out
-                </button>
-              </>
+                <button onClick={handleLogout}>Sign out</button>
+              </div>
             )}
-          </nav>
-        </div>
-      )}
+          </div>
+        ) : (
+          <>
+            <Link to="/login" className="btn-login">Sign in</Link>
+            <Link to="/register" className="btn-register">Sell flowers</Link>
+          </>
+        )}
+      </div>
+
+      <button className="menu-btn" onClick={() => setMobileOpen((o) => !o)} aria-label="Menu">
+        ☰
+      </button>
     </header>
   );
 }

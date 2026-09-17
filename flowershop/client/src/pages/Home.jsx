@@ -4,38 +4,25 @@ export function Home() {
   return (
     <section className="hero">
       <div className="hero-content">
-        <h1 className="hero-title">
-          <span className="hero-accent">Fresh</span> Flowers
-          <br />
-          <span className="hero-accent">Delivered</span> to Your Door
+        <h1>
+          <span>Fresh Flowers</span>
+          <span>Delivered</span>
         </h1>
-        <p className="hero-description">
+        <p>
           Discover our seasonal collection of premium flowers, carefully selected
           and arranged for every occasion.
         </p>
         <div className="hero-buttons">
-          <Link to="/shop" className="btn-primary">
+          <Link to="/shop" className="btn btn-primary">
             Browse Collection
           </Link>
-          <Link to="/register" className="btn-secondary">
+          <Link to="/register" className="btn btn-outline">
             Sell Your Flowers
           </Link>
         </div>
       </div>
-      <div className="flower-decoration flower-left">
-        <div className="flower">🌸</div>
-        <div className="flower">🌺</div>
-        <div className="flower">🌼</div>
-        <div className="flower">🌷</div>
-        <div className="flower">🌻</div>
-      </div>
-      <div className="flower-decoration flower-right">
-        <div className="flower">🌺</div>
-        <div className="flower">🌻</div>
-        <div className="flower">🌷</div>
-        <div className="flower">🌼</div>
-        <div className="flower">🌸</div>
-      </div>
+      <div className="flower-decoration flower-left">🌸</div>
+      <div className="flower-decoration flower-right">🌺</div>
     </section>
   );
 }

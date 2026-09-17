@@ -768,3 +768,150 @@ footer {
   transform: translateY(-4px);
 }
 
+
+
+/* =========================
+   HEADER EXTRAS (nav / cart / account)
+========================= */
+
+.header-icons {
+  grid-column: 3;
+  align-items: center;
+}
+
+.nav a.active {
+  color: var(--red);
+}
+
+.cart-link {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  color: var(--red);
+}
+
+.cart-count {
+  position: absolute;
+  top: -8px;
+  right: -10px;
+  min-width: 16px;
+  height: 16px;
+  padding: 0 4px;
+  border-radius: 999px;
+  background: var(--red);
+  color: #fff;
+  font-size: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn-login {
+  font-size: 12px;
+  color: var(--red);
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.btn-register {
+  font-size: 12px;
+  color: var(--red);
+  text-decoration: none;
+  white-space: nowrap;
+  padding: 8px 16px;
+  border: 1px solid var(--red);
+  border-radius: 20px;
+  transition: 0.25s;
+}
+
+.btn-register:hover {
+  background: var(--red);
+  color: #fff;
+}
+
+.user-menu {
+  position: relative;
+}
+
+.btn-user {
+  border: 0;
+  background: transparent;
+  color: var(--red);
+  font-size: 13px;
+}
+
+.user-dropdown {
+  position: absolute;
+  right: 0;
+  top: 150%;
+  min-width: 160px;
+  padding: 8px;
+  background: #fff;
+  border: 1px solid var(--light-pink);
+  border-radius: 12px;
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  z-index: 40;
+}
+
+.user-dropdown a,
+.user-dropdown button {
+  border: 0;
+  background: transparent;
+  text-align: left;
+  padding: 9px 12px;
+  border-radius: 8px;
+  font-size: 13px;
+  color: var(--text);
+  text-decoration: none;
+}
+
+.user-dropdown a:hover,
+.user-dropdown button:hover {
+  background: var(--light-pink);
+  color: var(--red);
+}
+
+
+/* =========================
+   FOOTER EXTRAS
+========================= */
+
+.site-footer {
+  display: block;
+}
+
+.footer-section p {
+  font-size: 14px;
+  line-height: 1.6;
+  margin-top: 10px;
+}
+
+.footer-section ul {
+  list-style: none;
+  margin-top: 12px;
+}
+
+.footer-section li {
+  margin: 8px 0;
+}
+
+.footer-section a {
+  color: #80575c;
+  font-size: 14px;
+  text-decoration: none;
+  transition: 0.2s;
+}
+
+.footer-section a:hover {
+  color: var(--red);
+}
+
+.footer-bottom {
+  background: #f6dbe4;
+  text-align: center;
+  padding: 16px;
+  font-size: 12px;
+  color: #8d5b62;
+}

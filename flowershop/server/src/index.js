@@ -8,6 +8,8 @@ import storeRoutes from './routes/store.js';
 import sellerRoutes from './routes/seller.js';
 import buyerRoutes from './routes/buyer.js';
 import adminRoutes from './routes/admin.js';
+import projectRoutes from './routes/project.js';
+import { populateProjectMemory } from './services/memory.js';
 import { UPLOAD_PATH } from './db.js';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
@@ -60,6 +62,7 @@ app.use('/api/store', storeRoutes);
 app.use('/api/seller', sellerRoutes);
 app.use('/api/orders', buyerRoutes);
 app.use('/api/admin', adminRoutes);
+app.use('/api/project', projectRoutes);
 
 app.use((req, res) => res.status(404).json({ error: 'Not found' }));
 
@@ -70,4 +73,8 @@ app.use((err, req, res, next) => {
 
 app.listen(PORT, () => {
   console.log(`PetalBloom API running on http://localhost:${PORT}`);
+  // Build the project knowledge graph once on startup so agents can query it.
+  populateProjectMemory()
+    .then((s) => console.log(`[knowledge] indexed ${s.files} files, ${s.nodes} nodes, ${s.edges} edges`))
+    .catch((e) => console.error('[knowledge] index failed:', e.message));
 });

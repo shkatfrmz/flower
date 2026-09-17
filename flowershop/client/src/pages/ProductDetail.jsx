@@ -5,7 +5,6 @@ import { useCart } from '../context/CartContext.jsx';
 import { useAddToCart } from '../hooks/useAddToCart.jsx';
 import { useApi } from '../hooks/useApi.jsx';
 import { toast } from 'react-hot-toast';
-import { FaStar } from 'react-icons/fa';
 
 export default function ProductDetail() {
   const { id } = useParams();

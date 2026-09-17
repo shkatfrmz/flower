@@ -1,5 +1,4 @@
 import { useRef, useState } from 'react';
-import { FaStar } from 'react-icons/fa';
 import { useAddToCart } from '../hooks/useAddToCart.jsx';
 import { toast } from 'react-hot-toast';
 

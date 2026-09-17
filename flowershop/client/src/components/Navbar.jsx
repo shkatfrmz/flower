@@ -28,6 +28,7 @@ export default function Navbar({ onToast }) {
   const navItems = [
     { to: '/', label: 'Home' },
     { to: '/shop', label: 'Shop' },
+    { to: '/graph', label: 'Graph' },
   ];
   if (user) {
     navItems.push({ to: user.role === 'admin' ? '/admin' : '/dashboard', label: user.role === 'admin' ? 'Admin' : 'My Shop' });
